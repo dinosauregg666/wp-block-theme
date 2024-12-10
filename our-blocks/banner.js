@@ -3,7 +3,7 @@ import { registerBlockType } from '@wordpress/blocks'
 
 registerBlockType('ourblocktheme/banner', {
     title: 'Banner',
-    supports: {
+    supports: { // 让模块宽度为满宽
       align: ['full']
     },
     attributes: {
@@ -26,7 +26,7 @@ function EditComponent() {
             <p>this is editing area</p>
             <div>
                 {/*限制用户可以添加的模块*/}
-                <InnerBlocks allowedBlocks={['ourblocktheme/genericheading']} />
+                <InnerBlocks allowedBlocks={['ourblocktheme/genericheading', 'ourblocktheme/genericbutton',]} />
             </div>
         </div>
     )

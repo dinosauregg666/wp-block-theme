@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "styles": {
     "blocks": {
       "core/button": {
@@ -49,7 +49,8 @@
       ]
     },
     "layout": {
-      "contentSize": "840px"
+      "contentSize": "800px",
+      "wideSize": "800px"
     }
   }
 }
