@@ -33,13 +33,5 @@ function EditComponent() {
 }
 
 function SaveComponent() {
-    return (
-        <div>
-            <img src={{backgroundImg: "/wp-content/themes/fictional-block-theme/images/library-hero.jpg"}} alt=""/>
-            <p>this is editing area</p>
-            <div>
-                <InnerBlocks.Content />
-            </div>
-        </div>
-    )
+    return <InnerBlocks.Content />
 }
