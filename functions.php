@@ -1,9 +1,11 @@
 <?php
 
-add_action('wp-enqueue_scripts', 'university_features');
+add_action('wp_enqueue_scripts', 'university_features');
 
 function university_features() {
+    add_theme_support('editor-styles'); // 确保编辑器样式被支持
     add_editor_style(array('build/style-index.css', 'build/index.css'));
+    add_image_size('pageBanner', 1500, 350, true); // 不知道为啥不生效
 }
 
 class JSXBlock {
