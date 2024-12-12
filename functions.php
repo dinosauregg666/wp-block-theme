@@ -9,8 +9,9 @@ function university_features() {
 }
 
 class JSXBlock {
-    function __construct($name, $renderCallback = null) {
+    function __construct($name, $renderCallback = null, $data = null) {
         $this->name = $name;
+        $this->data = $data;
         $this->renderCallback = $renderCallback;
         add_action('init', [$this, 'onInit']);
     }
@@ -30,6 +31,10 @@ class JSXBlock {
             'editor_script' => $this->name
         );
 
+        if($this->data) {
+            wp_localize_script($this->name, $this->name, $this->data);
+        }
+
         if ($this->renderCallback) {
             $ourArgs['render_callback'] = [$this, 'ourRenderCallBack'];
         }
@@ -38,6 +43,6 @@ class JSXBlock {
     }
 }
 
-new JSXBlock('banner', true);
+new JSXBlock('banner', true, ['fallbackimage' => get_theme_file_uri('/images/library-hero.jpg')]);
 new JSXBlock('genericheading');
 new JSXBlock('genericbutton');
