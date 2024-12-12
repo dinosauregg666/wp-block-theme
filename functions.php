@@ -24,7 +24,6 @@ class PlaceholderBlock {
 
     function onInit() {
         wp_register_script($this->name, get_stylesheet_directory_uri() . "/our-blocks/{$this->name}.js", array('wp-blocks', 'wp-editor'));
-
         register_block_type("ourblocktheme/{$this->name}", array(
             'editor_script' => $this->name,
             'render_callback' => [$this, 'ourRenderCallBack']
@@ -35,6 +34,9 @@ class PlaceholderBlock {
 new PlaceholderBlock('eventsandblogs');
 new PlaceholderBlock('header');
 new PlaceholderBlock('footer');
+new PlaceholderBlock('singlepost');
+new PlaceholderBlock('page');
+new PlaceholderBlock('blogindex');
 
 
 class JSXBlock {
