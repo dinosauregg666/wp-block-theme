@@ -12,13 +12,22 @@ registerBlockType('ourblocktheme/slide', {
     attributes: {
         align: {type: 'string', default: 'full'},
         imgID: {type: 'number'},
-        imgURL: {type: 'string', default: window.banner.fallbackimage}
+        imgURL: {type: 'string', default: window.banner.fallbackimage},
+        themeimage: {type: 'string'}
     },
     edit: EditComponent,
     save: SaveComponent
 })
 
 function EditComponent(props) {
+
+    useEffect(function() {
+        if(props.attributes.themeimage) {
+            props.setAttributes({imgURL:`${slide.themeimagepath}${props.attributes.themeimage}`})
+
+        }
+        console.log(props.attributes.themeimage)
+    }, [])
 
     useEffect(function() {
         if(props.attributes.imgID) {
@@ -28,7 +37,7 @@ function EditComponent(props) {
                     method: 'GET'
                 })
                 console.log(response)
-                props.setAttributes({imgURL: response.media_details.sizes.full.source_url})
+                props.setAttributes({themeimage: '', imgURL: response.media_details.sizes.full.source_url})
             }
             go()
         }
