@@ -8,6 +8,33 @@ function university_features() {
     add_image_size('pageBanner', 1500, 350, true); // 不知道为啥不生效
 }
 
+class PlaceholderBlock {
+    function __construct($name) {
+        $this->name = $name;
+        add_action('init', [$this, 'onInit']);
+    }
+
+    function ourRenderCallBack($attributes, $content) {
+        ob_start();
+
+        require get_theme_file_path("/our-blocks/{$this->name}.php");
+
+        return ob_get_clean();
+    }
+
+    function onInit() {
+        wp_register_script($this->name, get_stylesheet_directory_uri() . "/our-blocks/{$this->name}.js", array('wp-blocks', 'wp-editor'));
+
+        register_block_type("ourblocktheme/{$this->name}", array(
+            'editor_script' => $this->name,
+            'render_callback' => [$this, 'ourRenderCallBack']
+        ));
+    }
+}
+
+new PlaceholderBlock('eventsandblogs');
+
+
 class JSXBlock {
     function __construct($name, $renderCallback = null, $data = null) {
         $this->name = $name;
