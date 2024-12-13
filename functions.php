@@ -81,3 +81,21 @@ new JSXBlock('genericheading');
 new JSXBlock('genericbutton');
 new JSXBlock('slideshow', true);
 new JSXBlock('slide', true, ['themeimagepath' => get_theme_file_uri('/images/')]);
+
+
+// 限制block可以在哪用
+function myallowedblocks($allowed_block_types, $editor_context) {
+
+    if(!empty($editor_context->post->post_type=="professor")) {
+        return array('core/paragraph');
+    }
+
+    if(!empty($editor_context->post)) { // 当为post类型的编辑模式时，允许所有使用所有block
+        return $allowed_block_types;
+    }
+
+    // 否则编辑模板时，只允许使用以下两个block
+    return array('ourblocktheme/header', 'ourblocktheme/footer');
+}
+
+add_filter('allowed_block_types_all', 'myallowedblocks', 10, 2);
